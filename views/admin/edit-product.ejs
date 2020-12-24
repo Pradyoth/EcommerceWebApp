@@ -1,0 +1,44 @@
+<%-include('../includes/head.ejs')%>
+    
+</head>
+<body>
+      <%-include('../includes/navigation.ejs')%>
+        <main>
+            <% if (errorMessage) { %>
+                
+                <div> <%= errorMessage %></div>
+                <% } %>
+
+            <form class="product-form" action="/admin/<% if(editing) {%>edit-product<% }else { %>add-product<% } %>" method="POST" enctype="multipart/form-data">
+                <div class="form-control">
+                    <label for="title">Title</label>
+                    <input type="text" name="title" value="<% if(editing || hasError) {%><%=product.title%><%} %>">
+                </div>
+                <!-- <div class="form-control">
+                        <label for="imageUrl">Image URL</label>
+                        <input type="text" name="imageUrl" value="<% if(editing || hasError) {%> <%=product.imageUrl%><%} %>">
+                    </div> -->
+
+                    <div class="form-control">
+                            <label for="image">Image</label>
+                            <input type="file" name="image" />
+                        </div>
+                    <div class="form-control">
+                            <label for="price">Price</label>
+                            <input type="number" name="price" value="<% if(editing || hasError) {%><%=product.price%><%} %>">
+                        </div>
+                    <div class="form-control">
+                            <label for="description">Description</label>
+                            <textarea name="description"><% if(editing || hasError) {%><%=product.description%><%} %> </textarea>
+                    </div>
+                    <% if (editing) { %>
+                            <input type="hidden" value="<%= product._id %>" name = "productId">
+                    <% } %>
+                
+                    <button class="btn" type="submit"><% if (editing) { %>Update product <%} else {%>Add product<%} %>
+                        </button>
+            </form> 
+        </main>
+    
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title><%= pageTitle %></title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/product.css">
+    <link rel="stylesheet" href="/css/forms.css">
+</head>
+<body>
+    <header class="main-header">
+        <nav class="main-header__nav">
+            <ul class="main-header__item-list">
+                <!-- <li class="main-header__item"> <a href="/admin/add-product"> Add Product </a></li> -->
+                <li class="main-header__item"> <a href="/"> Shop </a></li>
+                
+                <li class="main-header__item"><a href="/products">Products</a></li>
+                <!-- <li class="main-header__item"><a href="/admin/products">Admin Products</a></li> -->
+                
+                <% if (isAuthenticated) { %>
+                    <li class="main-header__item"> <a href="/admin/add-product"> Add Product </a></li>
+                    <li class="main-header__item"><a href="/admin/products">Admin Products</a></li>
+                    <li class="main-header__item"><a href="/cart">Cart</a></li>
+                    <li class="main-header__item"><a href="/orders">Orders</a></li>
+
+                    <% } %>
+            </ul>
+
+            <ul class="main-header__item-list">
+                <% if (!isAuthenticated) { %>
+                <li class = "main-header__item">
+                    <a href="/login"> Login</a>
+                </li>
+                <li class="main-header__item">
+
+                    <a href="/signup"> Signup</a>
+                </li>
+                <% } else { %>
+                <li class = "main-header__item">
+                    <form action="/logout" method="post">
+                        <button type="submit"> Logout</button>
+                    </form>
+
+                </li>
+                <% } %>
+            </ul>
+        </nav>
+        <main>
+            <% if(orders.length <=0) { %>
+            <h1> Nothing there!</h1>
+            <% } else {%>
+                <ul>
+                    <% orders.forEach(order => { %>
+                    <li> 
+                        <h1> # <%= order._id %></h1>
+                        <ul>
+                            <% order.products.forEach(p => { %>
+                            <li> <%= p.product.title %> (<%= p.quantity %>) <a href=""> Invoice </a></a></li>
+                            <% }); %>
+
+                        </ul>
+
+                    </li>
+                    <% }); %>
+                </ul>
+                <% } %>
+        </main>
+    </header>
+</body>

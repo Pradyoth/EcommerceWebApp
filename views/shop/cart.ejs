@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title><%= pageTitle %></title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/product.css">
+    <link rel="stylesheet" href="/css/forms.css">
+</head>
+<body>
+    <header class="main-header">
+        <nav class="main-header__nav">
+            <ul class="main-header__item-list">
+               
+                <li class="main-header__item"> <a href="/"> Shop </a></li>
+                <li class="main-header__item"><a href="/products">Products</a></li> 
+                
+                <% if (isAuthenticated) { %>
+                    <li class="main-header__item"> <a href="/admin/add-product"> Add Product </a></li>
+                    <li class="main-header__item"><a href="/admin/products">Admin Products</a></li>
+                    <li class="main-header__item"><a href="/cart">Cart</a></li>
+                    <li class="main-header__item"><a href="/orders">Orders</a></li>
+
+                    <% } %>
+            </ul>
+            <ul class="main-header__item-list">
+                <% if (!isAuthenticated) { %>
+                    <li class = "main-header__item">
+                        <a href="/login"> Login</a>
+                    </li>
+                    <li class="main-header__item">
+
+                        <a href="/signup"> Signup</a>
+                    </li>
+                    <% } else {%>
+                <li class = "main-header__item">
+                    <form action="/logout" method="post">
+                        <button type="submit"> Logout</button>
+                    </form>
+
+                </li>
+                <% } %>
+            </ul>
+        </nav>
+
+        <main>
+
+            <% if (products.length > 0) { %>
+                <ul>
+                    <% products.forEach(p => { %>
+                        <li>
+                           <p><%= p.productId.title %> (<%= p.quantity%>) </p> 
+                           <form action="/cart-delete-item" method="post">
+                                  <input type="hidden" name="productId" value="<%= p.productId._id%>" />
+                                  <button class="btn" type="submit"> Delete</button>
+                            </form>
+                           
+                         </li>
+
+                    <% }) %>
+                </ul>
+                <div class="centered">
+
+                    <!-- <form action="/create-order" method="post">
+                        <button type="submit" class="btn">
+                            Order Now!
+                        </button>
+                    </form> -->
+                    <a href = "/checkout"> Order Now!</a>
+                </div>
+                
+            <% } else { %>
+                <h1> No Products in cart!</h1>
+                <% } %> 
+        </main>
