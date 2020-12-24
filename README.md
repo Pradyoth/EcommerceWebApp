@@ -23,7 +23,7 @@ Install npm from https://www.npmjs.com/get-npm <br />
 Install VSCode from https://code.visualstudio.com/download <br />
 Install latest version of Node.js from https://nodejs.org <br />
 Install Express.js by using the following command : npm install --save express <br />
-Run the Application using the following command : node app.js and visit http://localhost:3002.
+Run the app locally using the following command : node app.js and visit http://localhost:3002.
 
 
 
