@@ -14,7 +14,6 @@ Using Node.js with NoSQL (MongoDB) and Mongoose <br />
 Sessions + Cookies <br />
 User Authentication and Input Validation <br />
 Automated Testing (Via Unit-tests) <br />
-Deployment of Node.js App. 
 
 
 ### Installation and Code Execution
